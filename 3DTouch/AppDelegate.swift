@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import EventKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,6 +45,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
 
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        if shortcutItem.localizedTitle == "Edit" {
+            let vc =  storyBoard.instantiateViewController(withIdentifier: "EditnGaleryVC") as? EditnGaleryVC
+            vc?.titleStr = shortcutItem.localizedTitle
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+            
+        } else if shortcutItem.localizedTitle == "Show Pictures" {
+            let vc =  storyBoard.instantiateViewController(withIdentifier: "EditnGaleryVC") as? EditnGaleryVC
+            vc?.titleStr = shortcutItem.localizedTitle
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+            
+        } else {
+            
+        }
+    }
+    func createReminder(reminderTitle: String? = "", timeInterval: Date?) {
+        let eventStore = EKEventStore()
+        
+        eventStore.requestAccess(to: .reminder) { (granted, error) in
+            if granted && error == nil {
+                let reminder: EKReminder = EKReminder(eventStore: eventStore)
+                reminder.title = reminderTitle
+                reminder.priority = 2
+                reminder.notes = "This is sample notes created by vijendra yadav"
+                
+                let alarmTime = Date().addingTimeInterval(1*60*24*3)
+                let alarm = EKAlarm(absoluteDate: alarmTime)
+                reminder.addAlarm(alarm)
+                
+                reminder.calendar = eventStore.defaultCalendarForNewReminders()
+                
+                do {
+                    try eventStore.save(reminder, commit: true)
+                } catch {
+                    return
+                }
+            }
+        }
+    }
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {

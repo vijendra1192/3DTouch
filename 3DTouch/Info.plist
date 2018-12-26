@@ -20,6 +20,25 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>Gallery</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Show Pictures</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>addBundleIdentifier.showPictures</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>Edit</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Edit</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>addBundleIdentifier.edit</string>
+		</dict>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,5 +60,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSRemindersUsageDescription</key>
+	<string>App Used Reminder to set reminder</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>App Used Reminder to set calender</string>
 </dict>
 </plist>
